@@ -1,0 +1,33 @@
+.site-preview {
+    position: fixed;
+    right: 20px;
+    top: 100px;
+}
+
+.site-preview .content {
+    background: #eaf2ff;
+    border: 8px solid #98a1aa;
+    border-radius: 48px;
+    box-shadow: 0 4px 12px #2d2d331f;
+    height: 640px;
+    overflow: hidden;
+    width: 320px;
+}
+.site-preview .footer {
+    text-align: center;
+    position: relative;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.site-preview .goto-site {
+    padding: 10px;
+    border: 1px solid black;
+    font-size: 13px;
+    border-radius: 10px;
+}
+.custom-menu-link{
+min-width: 70px;
+color:rgb(115 103 240);
+}
