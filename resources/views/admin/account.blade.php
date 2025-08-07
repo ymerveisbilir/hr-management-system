@@ -9,7 +9,7 @@
                     <ul class="nav nav-pills flex-column flex-md-row mb-6 gap-md-0 gap-2">
                         <li class="nav-item">
                             <a class="nav-link active" href="{{ route('admin.account') }}"><i
-                                    class="icon-base ti tabler-users icon-sm me-1_5"></i>@lang('account.title')</a>
+                                    class="icon-base ti tabler-settings icon-sm me-1_5"></i>@lang('account.title')</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('admin.account_security') }}"><i

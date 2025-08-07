@@ -5,7 +5,7 @@
     'support' => 'Destek',
     'logout' => 'Çıkış Yap',
     'account' => 'Hesabım',
-    'security' => 'Güvenlik',
+    'security' => 'Şifre & Güvenlik',
 
     'users' => 'Kullanıcılar',
     'user_permission_type'   => 'İzin Türleri',

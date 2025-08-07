@@ -75,7 +75,7 @@
                     <a href="{{ route('admin.index') }}" class="app-brand-link">
                         <span class="app-brand-logo demo">
                             <span class="text-primary">
-                                <img src="/hr_logo.svg" width="40" height="62"/>
+                                <img src="/hr_logo2.svg" width="75" height="88" style="margin-left:-18px;"/>
                             </span>
                         </span>
                     </a>
@@ -273,7 +273,7 @@
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="{{ route('admin.account') }}">
-                                            <i class="icon-base ti tabler-users icon-sm me-1_5"></i><span
+                                            <i class="icon-base ti tabler-settings icon-sm me-1_5"></i><span
                                                 class="align-middle">@lang('admin_app.account')</span>
                                         </a>
                                     </li>

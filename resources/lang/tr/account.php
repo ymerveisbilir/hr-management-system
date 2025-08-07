@@ -16,7 +16,7 @@ return[
 'error_current_password' => 'Mevcut şifre hatalı !',
 'success_change_password' => 'Şifre güncellendi.',
 
-'security'  => 'Güvenlik',
+'security' => 'Şifre & Güvenlik',
 'photo_remove'  => 'Kaldır',
 
 'user_title'  => 'Ünvan',
