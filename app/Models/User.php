@@ -54,4 +54,18 @@ class User extends Authenticatable
     {
         return $this->belongsTo(User::class, 'approver_user');
     }
+    public function deviceAssignments()
+    {
+        return $this->hasMany(DeviceAssignment::class);
+    }
+
+    public function activeDeviceAssignments()
+    {
+        return $this->deviceAssignments()->whereNull('returned_at');
+    }
+
+    public function returnedDeviceAssignments()
+    {
+        return $this->deviceAssignments()->whereNotNull('returned_at');
+    }
 }

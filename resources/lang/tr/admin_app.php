@@ -11,4 +11,7 @@
     'user_permission_type'   => 'İzin Türleri',
     'user_permission'       => 'İzinlerim',
     'user_permission_request'   => 'İzinler(Talep Listesi)',
+
+    'device'    => 'Cihazlar',
+    'device_assignment' => 'Zimmetler',
 ];

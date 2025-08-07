@@ -1,16 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Middleware\SuperadminMiddleware;
-
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserPermissionTypeController;
 use App\Http\Controllers\UserPermissionController;
-
-Route::aliasMiddleware('superadmin', SuperadminMiddleware::class); //???
+use App\Http\Controllers\DeviceController;
+use App\Http\Controllers\DeviceAssignmentController;
 
 Route::middleware(['guest'])->group(function () { //ziyaretçiler
 Route::get('/login', [AuthController::class, 'login_index'])->name('admin.login');
@@ -43,6 +41,22 @@ Route::middleware('auth')->group(function () { //panel kullanıcıları
     Route::get('/user-permission-type/select/{id}', [UserPermissionTypeController::class,'select'])->name('admin.user_permission_type.select');
     Route::post('/user-permission-type/update', [UserPermissionTypeController::class, 'update'])->name('admin.user_permission_type.update');
     Route::post('/user-permission-type/delete/{id}', [UserPermissionTypeController::class, 'delete'])->name('admin.user_permission_type.delete');
+
+    //Devices Routes
+    Route::get('/devices', action: [DeviceController::class, 'index'])->name('admin.device.index');
+    Route::get('/device/new', [DeviceController::class,'new'])->name('admin.device.new');
+    Route::post('/device/create', [DeviceController::class,'create'])->name('admin.device.create');
+    Route::get('/device/select/{id}', [DeviceController::class,'select'])->name('admin.device.select');
+    Route::post('/device/update', [DeviceController::class, 'update'])->name('admin.device.update');
+    Route::post('/device/delete/{id}', [DeviceController::class, 'delete'])->name('admin.device.delete');
+
+    //Device Assignment Routes
+    Route::get('/device-assignments', action: [DeviceAssignmentController::class, 'index'])->name('admin.device_assignment.index');
+    Route::get('/device-assignment/new', [DeviceAssignmentController::class,'new'])->name('admin.device_assignment.new');
+    Route::post('/device-assignment/create', [DeviceAssignmentController::class,'create'])->name('admin.device_assignment.create');
+    Route::get('/device-assignment/select/{id}', [DeviceAssignmentController::class,'select'])->name('admin.device_assignment.select');
+    Route::post('/device-assignment/update', [DeviceAssignmentController::class, 'update'])->name('admin.device_assignment.update');
+    Route::post('/device-assignment/delete/{id}', [DeviceAssignmentController::class, 'delete'])->name('admin.device_assignment.delete');
     });
 
     //User Permission Routes
