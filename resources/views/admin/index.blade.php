@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 @section('title')
-    @lang('panel_index.title')
+    @lang('admin_index.title')
 @endsection
 @section('content')
 

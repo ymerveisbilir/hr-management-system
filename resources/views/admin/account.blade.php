@@ -1,7 +1,3 @@
-@php
-    $no_site_preview = true;
-@endphp
-
 @extends('admin.layouts.app')
 @section('title')
     @lang('account.title')
@@ -49,6 +45,7 @@
                                         value="{{ $auth_user['title'] }}"/>
                                 </div>
                             </div>
+                            <div success-msg></div>
                             <div class="mt-2">
                                 <button type="submit" class="btn btn-primary me-3">@lang('words.save')</button>
                             </div>

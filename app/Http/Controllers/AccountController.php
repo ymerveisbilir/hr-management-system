@@ -41,7 +41,9 @@ class AccountController extends Controller
                 'error' => [__('words.post_error')],
             ]);
         }
-        return ['redirect' => route('admin.account')];
+
+        return ['success_msg' => __('account.update_success_msg')];
+
     }
     public function security_index(){
         $auth_user = AuthUser::get();

@@ -61,8 +61,8 @@
 
 @php
     $auth_user = \App\Http\Helpers\AuthUser::get();
+    $isApprover_ids = \App\Http\Helpers\Functions::approverUserIds();
 @endphp
-
 <body>
 
     <!-- Layout wrapper -->
@@ -72,7 +72,7 @@
 
             <aside id="layout-menu" class="layout-menu menu-vertical menu">
                 <div class="app-brand demo">
-                    <a href="index.html" class="app-brand-link">
+                    <a href="{{ route('admin.index') }}" class="app-brand-link">
                         <span class="app-brand-logo demo">
                             <span class="text-primary">
                                 <img src="/hr_logo.svg" width="40" height="62"/>
@@ -96,6 +96,34 @@
                             <div data-i18n="@lang('admin_app.dashboard')">@lang('admin_app.dashboard')</div>
                         </a>
                     </li>
+                    <li class="menu-item">
+                        <a href="{{ route('admin.user_permission.index') }}" class="menu-link">
+                            <i class="menu-icon icon-base ti tabler-shield-plus"></i>
+                            <div data-i18n="@lang('admin_app.user_permission')">@lang('admin_app.user_permission')</div>
+                        </a>
+                    </li>
+                    @if(in_array($auth_user->id, $isApprover_ids))
+                    <li class="menu-item">
+                        <a href="{{ route('admin.user_permission_request.index') }}" class="menu-link">
+                            <i class="menu-icon icon-base ti tabler-git-pull-request"></i>
+                            <div data-i18n="@lang('admin_app.user_permission_request')">@lang('admin_app.user_permission_request')</div>
+                        </a>
+                    </li>
+                    @endif
+                    @if($auth_user['is_superadmin'] == 1)
+                    <li class="menu-item">
+                        <a href="{{ route('admin.user_permission_type.index') }}" class="menu-link">
+                            <i class="menu-icon icon-base ti tabler-settings"></i>
+                            <div data-i18n="@lang('admin_app.user_permission_type')">@lang('admin_app.user_permission_type')</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="{{ route('admin.user.index') }}" class="menu-link">
+                            <i class="menu-icon icon-base ti tabler-users"></i>
+                            <div data-i18n="@lang('admin_app.users')">@lang('admin_app.users')</div>
+                        </a>
+                    </li>
+                    @endif
 
                 </ul>
             </aside>
@@ -362,6 +390,8 @@
         <script src="/js/custom/form_ajax.js"></script>
         <script src="/js/jquery.inputmask.min.js"></script>
         <script src="/js/select2.min.js"></script>
+        <script src="/js/jquery.dataTables.js"></script>
+    
         @yield('js')
 </body>
 

@@ -34,7 +34,7 @@ class AuthController extends Controller
             return ['redirect' => route('admin.index')];
         }
         throw ValidationException::withMessages([
-            'email' => __('panel_login.wrong_email_or_password'),
+            'email' => __('admin_login.wrong_email_or_password'),
         ]);
     }
     public function logout(Request $request)

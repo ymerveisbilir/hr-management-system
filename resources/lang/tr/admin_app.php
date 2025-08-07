@@ -5,5 +5,10 @@
     'support' => 'Destek',
     'logout' => 'Çıkış Yap',
     'account' => 'Hesabım',
-    'security' => 'Güvenlik'
+    'security' => 'Güvenlik',
+
+    'users' => 'Kullanıcılar',
+    'user_permission_type'   => 'İzin Türleri',
+    'user_permission'       => 'İzinlerim',
+    'user_permission_request'   => 'İzinler(Talep Listesi)',
 ];

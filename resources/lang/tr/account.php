@@ -19,5 +19,6 @@ return[
 'security'  => 'Güvenlik',
 'photo_remove'  => 'Kaldır',
 
-'user_title'  => 'Ünvan'
+'user_title'  => 'Ünvan',
+'update_success_msg'       => 'Hesap bilgileri güncellendi.',
 ];
