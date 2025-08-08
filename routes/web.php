@@ -59,6 +59,10 @@ Route::middleware('auth')->group(function () { //panel kullanıcıları
     Route::post('/device-assignment/delete/{id}', [DeviceAssignmentController::class, 'delete'])->name('admin.device_assignment.delete');
     });
 
+    //My Debits Routes
+    Route::get('/my-debit-list', action: [DeviceAssignmentController::class, 'my_debit_list'])->name('admin.device_assignment.my_debit_list');
+
+
     //User Permission Routes
     Route::get('/user-permission', action: [UserPermissionController::class, 'index'])->name('admin.user_permission.index');
     Route::get('/user-permission/new', [UserPermissionController::class,'new'])->name('admin.user_permission.new');

@@ -90,20 +90,26 @@
 
                 <ul class="menu-inner py-1">
 
-                    <li class="menu-item">
+                    <li class="menu-item" style="background-color:#eceff1">
                         <a href="{{ route('admin.index') }}" class="menu-link">
                             <i class="menu-icon icon-base ti tabler-home" style="color: #7367f0;"></i>
                             <div data-i18n="@lang('admin_app.dashboard')">@lang('admin_app.dashboard')</div>
                         </a>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item" style="background-color:#eceff1">
+                        <a href="{{ route('admin.device_assignment.my_debit_list') }}" class="menu-link">
+                            <i class="menu-icon icon-base ti tabler-home" style="color: #7367f0;"></i>
+                            <div data-i18n="@lang('admin_app.my_debit_list')">@lang('admin_app.my_debit_list')</div>
+                        </a>
+                    </li>
+                    <li class="menu-item" style="background-color:#eceff1">
                         <a href="{{ route('admin.user_permission.index') }}" class="menu-link">
                             <i class="menu-icon icon-base ti tabler-calendar-event" style="color: #7367f0;"></i>
                             <div data-i18n="@lang('admin_app.user_permission')">@lang('admin_app.user_permission')</div>
                         </a>
                     </li>
                     @if(in_array($auth_user->id, $isApprover_ids))
-                    <li class="menu-item">
+                    <li class="menu-item" style="background-color:#eceff1">
                         <a href="{{ route('admin.user_permission_request.index') }}" class="menu-link">
                             <i class="menu-icon icon-base ti tabler-clipboard-check" style="color: #7367f0;"></i>
                             <div data-i18n="@lang('admin_app.user_permission_request')">@lang('admin_app.user_permission_request')</div>
@@ -111,25 +117,25 @@
                     </li>
                     @endif
                     @if($auth_user['is_superadmin'] == 1)
-                    <li class="menu-item">
+                    <li class="menu-item" style="background-color:#eceff1">
                         <a href="{{ route('admin.user.index') }}" class="menu-link">
                             <i class="menu-icon icon-base ti tabler-user-plus" style="color: #7367f0;"></i>
                             <div data-i18n="@lang('admin_app.users')">@lang('admin_app.users')</div>
                         </a>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item" style="background-color:#eceff1">
                         <a href="{{ route('admin.user_permission_type.index') }}" class="menu-link">
                             <i class="menu-icon icon-base ti tabler-tags" style="color: #7367f0;"></i>
                             <div data-i18n="@lang('admin_app.user_permission_type')">@lang('admin_app.user_permission_type')</div>
                         </a>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item" style="background-color:#eceff1">
                         <a href="{{ route('admin.device.index') }}" class="menu-link">
                             <i class="menu-icon icon-base ti tabler-device-desktop" style="color: #7367f0;"></i>
                             <div data-i18n="@lang('admin_app.device')">@lang('admin_app.device')</div>
                         </a>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item" style="background-color:#eceff1">
                         <a href="{{ route('admin.device_assignment.index') }}" class="menu-link">
                             <i class="menu-icon icon-base ti tabler-lock-star" style="color: #7367f0;"></i>
                             <div data-i18n="@lang('admin_app.device_assignment')">@lang('admin_app.device_assignment')</div>

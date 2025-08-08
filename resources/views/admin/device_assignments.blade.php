@@ -29,9 +29,9 @@
                             <table class="table table-striped table-hover mb-0">
                                 <thead>
                                     <tr style="background-color: #2c3e50;">
-                                        <th class="text-white py-2 px-4 border-bottom">{{ __('device_assignment.user_id') }}</th>
+                                        <th class="text-white py-2 px-4 border-bottom">{{ __('device_assignment.user_id2') }}</th>
                                         <th class="text-white py-2 px-4 border-bottom">{{ __('device_assignment.device_id') }}</th>
-                                        <th class="text-white py-2 px-4 border-bottom">{{ __('device_assignment.returned_at') }}</th>
+                                        <th class="text-white py-2 px-4 border-bottom">{{ __('device_assignment.status') }}</th>
                                         <th class="text-white py-2 px-4 border-bottom">{{ __('device_assignment.created_at') }}</th>
                                         <th class="text-white py-2 px-4 border-bottom"></th>
                                     </tr>
@@ -42,11 +42,11 @@
                                              <td>{{ $device_assignment->user->name . ' ' . $device_assignment->user->surname }}</td>
                                             <td>{{ $device_assignment->device->name }}</td>
                                             <td>
-                                             @if ($device_assignment->returned_at)
-                                                 {{ \Carbon\Carbon::parse($device_assignment->returned_at)->format('d.m.Y') }}
-                                             @else
-                                                 -
-                                             @endif
+                                            @if ($device_assignment->status == 'passive')
+                                                <span class="badge bg-danger">{{ __('words.passive') }}</span>
+                                            @else
+                                                <span class="badge bg-success">{{ __('words.active') }}</span>
+                                            @endif
                                              </td>
                                              <td>{{ $device_assignment->created_at->format('d.m.Y') }}</td>
                                             <td>
@@ -82,4 +82,5 @@
     </div>
 @endsection
 @section('js')
+
 @endsection

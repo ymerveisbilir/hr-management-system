@@ -8,13 +8,29 @@ use Illuminate\Support\Facades\DB;
 use App\Models\DeviceAssignment;
 use App\Models\Device;
 use App\Models\User;
+use Carbon\Carbon;
 
 class DeviceAssignmentController extends Controller
 {
     public function index(Request $request)
     {
         $auth_user = AuthUser::get();
-        $device_assignments = DeviceAssignment::with(['device', 'user'])->get();
+        $now = Carbon::now();
+
+        $device_assignments = DeviceAssignment::with(['device', 'user'])
+            ->get()
+            ->map(function($assignment) use ($now) {
+                $returnedAt = $assignment->returned_at ? Carbon::parse($assignment->returned_at) : null;
+    
+                if ($returnedAt && $returnedAt->lessThanOrEqualTo($now)) {
+                    $assignment->status = 'passive';
+                } else {
+                    $assignment->status = 'active';
+                }
+    
+                return $assignment;
+        });
+
         return view("admin.device_assignments",['auth_user' => $auth_user,'device_assignments' => $device_assignments]);
     }
 
@@ -108,5 +124,12 @@ class DeviceAssignmentController extends Controller
         $device_assignment->delete();
 
         return ['success_msg' => __('device_assignment.delete_success_msg')];
+    }
+    public function my_debit_list(Request $request){
+        $auth_user = AuthUser::get();
+
+        $device_assignments = $auth_user->activeDeviceAssignments()->with('device')->get();
+
+        return view("admin.my_debit_list",['device_assignments' => $device_assignments]);
     }
 }

@@ -14,4 +14,5 @@
 
     'device'    => 'Cihazlar',
     'device_assignment' => 'Zimmetler',
+    'my_debit_list'     => 'Zimmetlerim',
 ];

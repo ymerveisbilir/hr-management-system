@@ -6,6 +6,7 @@ return[
 'serial_number' => 'Seri No',
 'description'     => 'Açıklama',
 'user_id'         => 'Zimmetlenecek Kişi',
+'user_id2'         => 'Zimmetlenen Kişi',
 'device_id'       => 'Cihaz',
 'note'   => 'Not',
 'returned_at' => 'Geri Verilme Tarihi',
@@ -15,4 +16,7 @@ return[
 'delete_success_msg'       => 'Zimmet silindi.',
 'edit'            => 'Düzenle',
 'update_success_msg'       => 'Zimmet bilgileri güncellendi.',
+
+'title2' => 'Zimmetlerim',
+'status' => 'Durum',
 ];
