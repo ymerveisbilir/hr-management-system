@@ -66,7 +66,7 @@
                                                         class="btn btn-sm btn-primary">
                                                         {{ __('user.edit') }}
                                                     </a>
-                                                    <form action="{{ route('admin.user.delete', $user->id) }}" method="POST"
+                                                    <form no-auto action="{{ route('admin.user.delete', $user->id) }}" method="POST"
                                                         onsubmit="return confirm('Bu kullanıcıyı silmek istediğinize emin misiniz?');">
                                                         @csrf
                                                         <button type="submit" class="btn btn-sm btn-danger">

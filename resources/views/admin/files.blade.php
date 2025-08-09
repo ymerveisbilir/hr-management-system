@@ -62,7 +62,7 @@
                                                         class="btn btn-sm btn-primary">
                                                         {{ __('file.edit') }}
                                                     </a>
-                                                    <form action="{{ route('admin.file.delete', $file->id) }}" method="POST"
+                                                    <form no-auto action="{{ route('admin.file.delete', $file->id) }}" method="POST"
                                                         onsubmit="return confirm('Bu cihazı silmek istediğinize emin misiniz?');">
                                                         @csrf
                                                         <button type="submit" class="btn btn-sm btn-danger">

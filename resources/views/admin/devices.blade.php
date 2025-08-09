@@ -66,7 +66,7 @@
                                                         class="btn btn-sm btn-primary">
                                                         {{ __('device.edit') }}
                                                     </a>
-                                                    <form action="{{ route('admin.device.delete', $device->id) }}" method="POST"
+                                                    <form no-auto action="{{ route('admin.device.delete', $device->id) }}" method="POST"
                                                         onsubmit="return confirm('Bu cihazı silmek istediğinize emin misiniz?');">
                                                         @csrf
                                                         <button type="submit" class="btn btn-sm btn-danger">

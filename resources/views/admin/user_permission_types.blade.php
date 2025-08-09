@@ -62,7 +62,7 @@
                                                      class="btn btn-sm btn-primary">
                                                      {{ __('user_permission_type.edit') }}
                                                  </a>
-                                                 <form action="{{ route('admin.user_permission_type.delete', $user_permission_type->id) }}" method="POST"
+                                                 <form no-auto action="{{ route('admin.user_permission_type.delete', $user_permission_type->id) }}" method="POST"
                                                      onsubmit="return confirm('Bu izin türünü silmek istediğinize emin misiniz?');">
                                                      @csrf
                                                      <button type="submit" class="btn btn-sm btn-danger">

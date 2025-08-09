@@ -1,6 +1,6 @@
 <?php 
 return[
-'title' => 'İzinlerim',
+'title' => 'İzin Talepleri',
 'description'   => 'Açıklama',
 'created_at'      => 'Oluşturulma Tarihi',
 'start_date'      => 'Başlangıç Tarihi',

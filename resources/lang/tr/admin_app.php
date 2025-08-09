@@ -9,8 +9,8 @@
 
     'users' => 'Kullanıcılar',
     'user_permission_type'   => 'İzin Türleri',
-    'user_permission'       => 'İzinlerim',
-    'user_permission_request'   => 'İzinler(Talep Listesi)',
+    'user_permission'       => 'İzin Talepleri',
+    'user_permission_request'   => 'İzin Talepleri(Onay Ekranı)',
 
     'device'    => 'Cihazlar',
     'device_assignment' => 'Zimmetler',

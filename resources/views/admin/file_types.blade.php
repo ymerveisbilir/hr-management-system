@@ -71,13 +71,13 @@
                                                     class="btn btn-sm btn-primary">
                                                     {{ __('file_type.edit') }}
                                                 </a>
-                                                <form no-action action="{{ route('admin.file_type.delete', $file_type->id) }}" method="POST"
-                                                      onsubmit="return confirm('Bu dosya türünü silmek istediğinize emin misiniz?');">
-                                                      @csrf
-                                                      <button type="submit" class="btn btn-sm btn-danger">
-                                                          {{ __('file_type.delete') }}
-                                                      </button>
-                                                  </form>
+                                                <form no-auto action="{{ route('admin.file_type.delete', $file_type->id) }}" method="POST"
+                                                    onsubmit="return confirm('Bu dosya türünü silmek istediğinize emin misiniz?');">
+                                                  @csrf
+                                                  <button type="submit" class="btn btn-sm btn-danger">
+                                                      {{ __('file_type.delete') }}
+                                                  </button>
+                                              </form>
                                             </div>
                                         </td>
                                     </tr>
