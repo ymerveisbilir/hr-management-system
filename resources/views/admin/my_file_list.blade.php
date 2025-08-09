@@ -1,15 +1,15 @@
 @extends('admin.layouts.app')
 @section('title')
-    @lang('device_assignment.title2')
+    @lang('file.title2')
 @endsection
 @section('content')
     <div class="content-wrapper">
         <div class="container-xxl flex-grow-1 container-p-y">
                 <div class="card">
                     <div class="card-body">
-                        <h3 class="mb-2">{{ __('device_assignment.title2') }}</h3>
+                        <h3 class="mb-2">{{ __('file.title2') }}</h3>
                         <div class="d-flex justify-content-between align-items-center mb-3">
-                            <form action="{{ route('admin.device_assignment.my_debit_list') }}" method="GET" class="d-flex" no-auto>
+                            <form action="{{ route('admin.file.my_file_list') }}" method="GET" class="d-flex" no-auto>
                                 <input
                                     type="text"
                                     name="search"
@@ -19,7 +19,7 @@
                                 />
                                 <button type="submit" class="btn btn-primary">@lang('words.search')</button>
                                 @if(!empty($search))
-                                              <a href="{{ route('admin.device_assignment.my_debit_list') }}" class="btn btn-secondary">
+                                              <a href="{{ route('admin.file.my_file_list') }}" class="btn btn-secondary">
                                               @lang('words.clear')
                                               </a>
                                  @endif
@@ -29,30 +29,24 @@
                             <table class="table table-striped table-hover mb-0">
                                 <thead>
                                     <tr style="background-color: #2c3e50;">
-                                        <th class="text-white py-2 px-4 border-bottom">{{ __('device_assignment.device_id') }}</th>
-                                        <th class="text-white py-2 px-4 border-bottom">{{ __('device_assignment.type') }}</th>
-                                        <th class="text-white py-2 px-4 border-bottom">{{ __('device_assignment.serial_number') }}</th>
-                                        <th class="text-white py-2 px-4 border-bottom">{{ __('device_assignment.note') }}</th>
-                                        <th class="text-white py-2 px-4 border-bottom">{{ __('device_assignment.returned_at') }}</th>
-                                        <th class="text-white py-2 px-4 border-bottom">{{ __('device_assignment.created_at') }}</th>
+                                        <th class="text-white py-2 px-4 border-bottom">{{ __('file.user_id') }}</th>
+                                        <th class="text-white py-2 px-4 border-bottom">{{ __('file.title') }}</th>
+                                        <th class="text-white py-2 px-4 border-bottom">{{ __('file.original_name') }}</th>
+                                        <th class="text-white py-2 px-4 border-bottom">{{ __('file.file_type_id') }}</th>
+                                        <th class="text-white py-2 px-4 border-bottom">{{ __('file.created_at') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white">
-                                    @forelse ($device_assignments as $device_assignment)
+                                    @forelse ($files as $file)
                                         <tr class="hover:bg-gray-100">
-                                            <td>{{ $device_assignment->device->name }}</td>
-                                            <td>{{ $device_assignment->device->type }}</td>
-                                            <td>{{ $device_assignment->device->serial_number }}</td>
-                                            <td>{{ $device_assignment->note }}</td>
+                                            <td>{{ $file->uploader->name ." ".  $file->uploader->surname}}</td>
+                                            <td>{{ $file->title }}</td>
                                             <td>
-                                             @if ($device_assignment->returned_at)
-                                                 {{ \Carbon\Carbon::parse($device_assignment->returned_at)->format('d.m.Y') }}
-                                             @else
-                                                 -
-                                             @endif
-                                             </td>
-                                             <td>{{ $device_assignment->created_at->format('d.m.Y') }}</td>
-
+                                             <a href="{{ asset('storage/' . $file->file_path) }}" target="_blank">
+                                               {{ $file->original_name }}
+                                             </a>
+                                           </td>                                            <td>{{ $file->fileType->name }}</td>
+                                            <td>{{ $file->created_at->format('d.m.Y') }}</td>
                                         </tr>
                                         @empty
                                         <tr>
@@ -64,7 +58,7 @@
                                 </tbody>
                             </table>
                             <div class="mt-3 d-flex justify-content-center">
-                                {{ $device_assignments->links('pagination::bootstrap-5') }}
+                                {{ $files->links('pagination::bootstrap-5') }}
                             </div>
                         </div>
                     </div>

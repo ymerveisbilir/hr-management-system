@@ -12,8 +12,18 @@ class UserPermissionTypeController extends Controller
     public function index(Request $request)
     {
         $auth_user = AuthUser::get();
-        $user_permission_types = UserPermissionType::get();
-        return view("admin.user_permission_types",['auth_user' => $auth_user,'user_permission_types' => $user_permission_types]);
+
+        $search = $request->input('search');
+
+        $query = UserPermissionType::query();
+
+        if ($search) {
+            $query->where('name', 'like', "%{$search}%");
+        }
+
+        $user_permission_types = $query->orderBy('created_at', 'desc')->paginate(3);
+
+        return view("admin.user_permission_types",['auth_user' => $auth_user,'user_permission_types' => $user_permission_types,'search' => $search]);
     }
 
     public function new()

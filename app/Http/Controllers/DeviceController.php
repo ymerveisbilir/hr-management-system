@@ -12,8 +12,28 @@ class DeviceController extends Controller
     public function index(Request $request)
     {
         $auth_user = AuthUser::get();
-        $devices = Device::get();
-        return view("admin.devices",['auth_user' => $auth_user,'devices' => $devices]);
+        $search = $request->input('search');
+
+        $query = Device::query();
+
+        if (!empty($search)) {
+            $query->where(function($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                ->orWhere('serial_number', 'like', "%{$search}%")
+                ->orWhere('type', 'like', "%{$search}%");
+            });
+        }
+
+        $devices = $query
+            ->orderBy('created_at', 'desc')
+            ->paginate(3)
+            ->appends(['search' => $search]);
+
+        return view("admin.devices", [
+            'auth_user' => $auth_user,
+            'devices' => $devices,
+            'search' => $search
+        ]);
     }
     public function new()
     {

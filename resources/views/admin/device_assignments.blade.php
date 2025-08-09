@@ -24,7 +24,24 @@
                             <small class="align-middle">{{ __('words.new_add') }}</small>
                         </a>
                     </div>
-                    <div class="card-body p-0">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <form action="{{ route('admin.device_assignment.index') }}" method="GET" class="d-flex" no-auto>
+                                <input
+                                    type="text"
+                                    name="search"
+                                    class="form-control me-2"
+                                    placeholder="@lang('words.search')"
+                                    value="{{ old('search', $search) }}"
+                                />
+                                <button type="submit" class="btn btn-primary">@lang('words.search')</button>
+                                @if(!empty($search))
+                                              <a href="{{ route('admin.device_assignment.index') }}" class="btn btn-secondary">
+                                              @lang('words.clear')
+                                              </a>
+                                 @endif
+                            </form>
+                        </div>
                         <div class="table-responsive">
                             <table class="table table-striped table-hover mb-0">
                                 <thead>
@@ -74,6 +91,9 @@
                                     @endforelse
                                 </tbody>
                             </table>
+                            <div class="mt-3 d-flex justify-content-center">
+                                {{ $device_assignments->links('pagination::bootstrap-5') }}
+                            </div>
                         </div>
                     </div>
                 </div>

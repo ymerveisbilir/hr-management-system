@@ -16,11 +16,28 @@ class UserPermissionController extends Controller
     public function index(Request $request)
     {
         $auth_user = AuthUser::get();
-        $user_permissions = UserPermission::with('user.approver')
-        ->where('user_id', $auth_user->id)
-        ->get();        
-        
-        return view("admin.user_permissions",['auth_user' => $auth_user,'user_permissions' => $user_permissions]);
+        $search = $request->input('search');
+
+        $query = UserPermission::with('user.approver')
+            ->where('user_id', $auth_user->id);
+
+        if (!empty($search)) {
+            $query->whereHas('user', function($q) use ($search) {
+                $q->where('description', 'like', "%{$search}%")
+                ->orWhere('email', 'like', "%{$search}%");
+            });
+        }
+
+        $user_permissions = $query
+            ->orderBy('created_at', 'desc')
+            ->paginate(3) 
+            ->appends(['search' => $search]);
+
+        return view("admin.user_permissions", [
+            'auth_user' => $auth_user,
+            'user_permissions' => $user_permissions,
+            'search' => $search
+        ]);
     }
 
     public function new()
@@ -118,21 +135,36 @@ class UserPermissionController extends Controller
     public function request_index(Request $request)
     {
         $auth_user = AuthUser::get();
-
+    
         $isApprover = Functions::approverUserIds();
-
-        if (!in_array($auth_user->id, $isApprover)) {
+    
+        if (!$isApprover) {
             abort(403, 'Yetkisiz erişim.');
         }
-
+    
+        $search = $request->input('search');
+    
         $user_permissions = UserPermission::with('user')
-        ->whereHas('user', function($query) use ($auth_user) {
-            $query->where('approver_user', $auth_user->id);
-        })
-        ->get();        
-        
-        return view("admin.user_permission_requests",['auth_user' => $auth_user,'user_permissions' => $user_permissions]);        
-    }
+            ->whereHas('user', function ($query) use ($auth_user, $search) {
+                $query->where('approver_user', $auth_user->id);
+    
+                if (!empty($search)) {
+                    $query->where(function ($q) use ($search) {
+                        $q->where('name', 'like', "%{$search}%")
+                          ->orWhere('description', 'like', "%{$search}%");
+                    });
+                }
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate(10)
+            ->appends(['search' => $search]); // Arama parametresini koru
+    
+        return view("admin.user_permission_requests", [
+            'auth_user' => $auth_user,
+            'user_permissions' => $user_permissions,
+            'search' => $search, // view’a gönder
+        ]);
+    }    
 
     public function update_status(Request $request, $id)
     {

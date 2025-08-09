@@ -68,4 +68,8 @@ class User extends Authenticatable
     {
         return $this->deviceAssignments()->whereNotNull('returned_at');
     }
+    public function files()
+    {
+        return $this->belongsToMany(File::class, 'file_user');
+    }
 }

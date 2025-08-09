@@ -16,22 +16,43 @@ class DeviceAssignmentController extends Controller
     {
         $auth_user = AuthUser::get();
         $now = Carbon::now();
+        $search = $request->input('search');
 
-        $device_assignments = DeviceAssignment::with(['device', 'user'])
-            ->get()
-            ->map(function($assignment) use ($now) {
-                $returnedAt = $assignment->returned_at ? Carbon::parse($assignment->returned_at) : null;
-    
-                if ($returnedAt && $returnedAt->lessThanOrEqualTo($now)) {
-                    $assignment->status = 'passive';
-                } else {
-                    $assignment->status = 'active';
-                }
-    
-                return $assignment;
+        $query = DeviceAssignment::with(['device', 'user']);
+
+        if (!empty($search)) {
+            $query->whereHas('device', function ($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                ->orWhere('serial_number', 'like', "%{$search}%");
+            })
+            ->orWhereHas('user', function ($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                ->orWhere('email', 'like', "%{$search}%");
+            });
+        }
+
+        $device_assignments = $query
+            ->orderBy('created_at', 'desc')
+            ->paginate(3)
+            ->appends(['search' => $search]);
+
+        $device_assignments->getCollection()->transform(function ($assignment) use ($now) {
+            $returnedAt = $assignment->returned_at ? Carbon::parse($assignment->returned_at) : null;
+
+            if ($returnedAt && $returnedAt->lessThanOrEqualTo($now)) {
+                $assignment->status = 'passive';
+            } else {
+                $assignment->status = 'active';
+            }
+
+            return $assignment;
         });
 
-        return view("admin.device_assignments",['auth_user' => $auth_user,'device_assignments' => $device_assignments]);
+        return view("admin.device_assignments", [
+            'auth_user' => $auth_user,
+            'device_assignments' => $device_assignments,
+            'search' => $search
+        ]);
     }
 
     public function new()
@@ -125,11 +146,28 @@ class DeviceAssignmentController extends Controller
 
         return ['success_msg' => __('device_assignment.delete_success_msg')];
     }
-    public function my_debit_list(Request $request){
+    public function my_debit_list(Request $request)
+    {
         $auth_user = AuthUser::get();
-
-        $device_assignments = $auth_user->activeDeviceAssignments()->with('device')->get();
-
-        return view("admin.my_debit_list",['device_assignments' => $device_assignments]);
+        $search = $request->input('search');
+    
+        $query = $auth_user->activeDeviceAssignments()->with('device');
+    
+        if (!empty($search)) {
+            $query->whereHas('device', function ($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                  ->orWhere('serial_number', 'like', "%{$search}%");
+            });
+        }
+    
+        $device_assignments = $query
+            ->orderBy('created_at', 'desc')
+            ->paginate(3)
+            ->appends(['search' => $search]);
+    
+        return view("admin.my_debit_list", [
+            'device_assignments' => $device_assignments,
+            'search' => $search
+        ]);
     }
 }

@@ -8,4 +8,7 @@ return [
 'no_data_found' => 'Kayıt bulunamadı.',
 'active' => 'Aktif',
 'passive'         => 'Pasif',
+'search' => 'Ara',
+'total'  => 'Toplam Kayıt',
+'clear'  => 'Temizle',
 ];

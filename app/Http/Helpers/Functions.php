@@ -8,6 +8,7 @@ class Functions
 {
     public static function approverUserIds()
     {
-        return User::whereNotNull('approver_user')->pluck('id')->toArray();
+        $auth_user = AuthUser::get();
+        return User::where('approver_user', $auth_user['id'])->exists();
     }
 }

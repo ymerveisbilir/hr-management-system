@@ -27,7 +27,24 @@
                             <small class="align-middle">{{ __('words.new_add') }}</small>
                         </a>
                     </div>
-                    <div class="card-body p-0">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <form action="{{ route('admin.user_permission.index') }}" method="GET" class="d-flex" no-auto>
+                                <input
+                                    type="text"
+                                    name="search"
+                                    class="form-control me-2"
+                                    placeholder="@lang('words.search')"
+                                    value="{{ old('search', $search) }}"
+                                />
+                                <button type="submit" class="btn btn-primary">@lang('words.search')</button>
+                                @if(!empty($search))
+                                              <a href="{{ route('admin.user_permission.index') }}" class="btn btn-secondary">
+                                              @lang('words.clear')
+                                              </a>
+                                 @endif
+                            </form>
+                        </div>
                         <div class="table-responsive">
                             <table class="table table-striped table-hover mb-0">
                                 <thead>
@@ -81,12 +98,6 @@
                                                      @php
                                                       $permissionOwner = $user_permission->user; // İzni oluşturan kullanıcı
                                                       @endphp
-                                                     @if($auth_user->id == $permissionOwner->approver_user)
-                                                     <a href="{{ route('admin.user_permission.select', $user_permission->id) }}"
-                                                      class="btn btn-sm btn-primary">
-                                                      {{ __('user_permission.edit') }}
-                                                  </a>
-                                                     @endif
                                                  </form>
                                              @endif
                                              </div>
@@ -101,6 +112,9 @@
                                         @endforelse
                                     </tbody>
                             </table>
+                            <div class="mt-3 d-flex justify-content-center">
+                                {{ $user_permissions->links('pagination::bootstrap-5') }}
+                            </div>
                         </div>
                     </div>
                 </div>

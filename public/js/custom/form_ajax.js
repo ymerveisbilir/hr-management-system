@@ -1,4 +1,7 @@
 $("form").on("submit", function (event) {
+    if ($(this).is("[no-auto]")) {
+        return; // normal submit'e izin ver
+    }
     event.preventDefault();
 
     var form = $(this);

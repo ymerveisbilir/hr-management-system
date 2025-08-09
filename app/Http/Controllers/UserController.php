@@ -15,8 +15,29 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $auth_user = AuthUser::get();
-        $users = User::where('created_by',$auth_user['id'])->get();
-        return view("admin.users",['auth_user' => $auth_user,'users' => $users]);
+        $search = $request->input('search');
+    
+        $query = User::query();
+    
+        if (!empty($search)) {
+            $query->where(function($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                  ->orWhere('surname', 'like', "%{$search}%")
+                  ->orWhere('email', 'like', "%{$search}%")
+                  ->orWhere('title', 'like', "%{$search}%");
+            });
+        }
+    
+        $users = $query
+            ->orderBy('created_at', 'desc')
+            ->paginate(3)
+            ->appends(['search' => $search]); 
+    
+        return view("admin.users", [
+            'auth_user' => $auth_user,
+            'users' => $users,
+            'search' => $search
+        ]);
     }
 
     public function new()

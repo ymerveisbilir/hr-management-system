@@ -9,6 +9,8 @@ use App\Http\Controllers\UserPermissionTypeController;
 use App\Http\Controllers\UserPermissionController;
 use App\Http\Controllers\DeviceController;
 use App\Http\Controllers\DeviceAssignmentController;
+use App\Http\Controllers\FileTypeController;
+use App\Http\Controllers\FileController;
 
 Route::middleware(['guest'])->group(function () { //ziyaretçiler
 Route::get('/login', [AuthController::class, 'login_index'])->name('admin.login');
@@ -50,14 +52,33 @@ Route::middleware('auth')->group(function () { //panel kullanıcıları
     Route::post('/device/update', [DeviceController::class, 'update'])->name('admin.device.update');
     Route::post('/device/delete/{id}', [DeviceController::class, 'delete'])->name('admin.device.delete');
 
-    //Device Assignment Routes
+    //Device Assignments Routes
     Route::get('/device-assignments', action: [DeviceAssignmentController::class, 'index'])->name('admin.device_assignment.index');
     Route::get('/device-assignment/new', [DeviceAssignmentController::class,'new'])->name('admin.device_assignment.new');
     Route::post('/device-assignment/create', [DeviceAssignmentController::class,'create'])->name('admin.device_assignment.create');
     Route::get('/device-assignment/select/{id}', [DeviceAssignmentController::class,'select'])->name('admin.device_assignment.select');
     Route::post('/device-assignment/update', [DeviceAssignmentController::class, 'update'])->name('admin.device_assignment.update');
     Route::post('/device-assignment/delete/{id}', [DeviceAssignmentController::class, 'delete'])->name('admin.device_assignment.delete');
+
+    //File Types Routes
+    Route::get('/file-types', action: [FileTypeController::class, 'index'])->name('admin.file_type.index');
+    Route::get('/file-type/new', [FileTypeController::class,'new'])->name('admin.file_type.new');
+    Route::post('/file-type/create', [FileTypeController::class,'create'])->name('admin.file_type.create');
+    Route::get('/file-type/select/{id}', [FileTypeController::class,'select'])->name('admin.file_type.select');
+    Route::post('/file-type/update', [FileTypeController::class, 'update'])->name('admin.file_type.update');
+    Route::post('/file-type/delete/{id}', [FileTypeController::class, 'delete'])->name('admin.file_type.delete');
+
+    //Files Routes
+    Route::get('/files', action: [FileController::class, 'index'])->name('admin.file.index');
+    Route::get('/file/new', [FileController::class,'new'])->name('admin.file.new');
+    Route::post('/file/create', [FileController::class,'create'])->name('admin.file.create');
+    Route::get('/file/select/{id}', [FileController::class,'select'])->name('admin.file.select');
+    Route::post('/file/update', [FileController::class, 'update'])->name('admin.file.update');
+    Route::post('/file/delete/{id}', [FileController::class, 'delete'])->name('admin.file.delete');
     });
+
+    //My File List Routes
+    Route::get('/my-file-list', action: [FileController::class, 'my_file_list'])->name('admin.file.my_file_list');
 
     //My Debits Routes
     Route::get('/my-debit-list', action: [DeviceAssignmentController::class, 'my_debit_list'])->name('admin.device_assignment.my_debit_list');

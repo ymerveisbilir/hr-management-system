@@ -15,4 +15,8 @@
     'device'    => 'Cihazlar',
     'device_assignment' => 'Zimmetler',
     'my_debit_list'     => 'Zimmetlerim',
+    'file_type'         => 'Dosya Türleri',
+    'file'              => 'Dosyalar',
+    'my_file_list'      => 'Dosyalarım',
+    'management_screens'    => 'Yönetici Ekranları',
 ];

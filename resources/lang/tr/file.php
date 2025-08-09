@@ -1,0 +1,22 @@
+<?php 
+return[
+'page_title'      => 'Dosyalar',
+'title' => 'Dosya Adı',
+'title2' => 'Dosyalarım',
+'upload_file' => 'Dosya Yükle',
+'file_type_id'    => 'Dosya Türü',
+'user_id'         => 'Dosya Ekleyen Kişi',
+'file_type'    => 'Dosya Türü Seç',
+'current_file'    => 'Mevcut dosya',
+'original_name'   => 'Yüklenen Dosya Adı',
+'assigned_users'  => 'Dosya Atanacak Kullanıcılar',
+'status' => 'Durum',
+'name2'   => 'Dosya Türü',
+'extension_not_allowed' => 'Dosya uzantısı ":ext" izin verilenler arasında değil.',
+'created_at'      => 'Oluşturulma Tarihi',
+'success_msg' => 'Dosya oluşturuldu.',
+'delete'          => 'Sil',
+'delete_success_msg'       => 'Dosya silindi.',
+'edit'            => 'Düzenle',
+'update_success_msg'       => 'Dosya güncellendi.',
+];

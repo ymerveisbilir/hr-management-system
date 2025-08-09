@@ -1,16 +1,16 @@
 @extends('admin.layouts.app')
 @section('title')
-    @lang('device.title')
+    @lang('file.page_title')
 @endsection
 @section('content')
     <div class="content-wrapper">
         <div class="container-xxl flex-grow-1 container-p-y">
-            @if (isset($new) || isset($device))
+            @if (isset($new) || isset($file))
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card mb-4">
                             <div class="card-body">
-                                @include('admin.forms.device')
+                                @include('admin.forms.file')
                             </div>
                         </div>
                     </div>
@@ -18,59 +18,55 @@
             @else
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <h3 class="mb-0">{{ __('device.title') }}</h3>
-                        <a class="btn btn-success text-white waves-effect waves-light" href="{{ route('admin.device.new') }}">
+                        <h3 class="mb-0">{{ __('file.page_title') }}</h3>
+                        <a class="btn btn-success text-white waves-effect waves-light" href="{{ route('admin.file.new') }}">
                             <i class="icon-base ti tabler-plus ms-2 icon-14px"></i>
                             <small class="align-middle">{{ __('words.new_add') }}</small>
                         </a>
                     </div>
                     <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <form action="{{ route('admin.device.index') }}" method="GET" class="d-flex" no-auto>
-                                <input
-                                    type="text"
-                                    name="search"
-                                    class="form-control me-2"
-                                    placeholder="@lang('words.search')"
-                                    value="{{ old('search', $search) }}"
-                                />
-                                <button type="submit" class="btn btn-primary">@lang('words.search')</button>
-                                @if(!empty($search))
-                                              <a href="{{ route('admin.device.index') }}" class="btn btn-secondary">
-                                              @lang('words.clear')
-                                              </a>
-                                 @endif
-                            </form>
-                        </div>
+                           <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <form action="{{ route('admin.file.index') }}" method="GET" class="d-flex" no-auto>
+                                        <input
+                                            type="text"
+                                            name="search"
+                                            class="form-control me-2"
+                                            placeholder="@lang('words.search')"
+                                            value="{{ old('search', $search) }}"
+                                        />
+                                        <button type="submit" class="btn btn-primary">@lang('words.search')</button>
+                                        @if(!empty($search))
+                                                      <a href="{{ route('admin.file.index') }}" class="btn btn-secondary">
+                                                      @lang('words.clear')
+                                                      </a>
+                                         @endif
+                                    </form>
+                           </div>
                         <div class="table-responsive">
                             <table class="table table-striped table-hover mb-0">
                                 <thead>
                                     <tr style="background-color: #2c3e50;">
-                                        <th class="text-white py-2 px-4 border-bottom">{{ __('device.name') }}</th>
-                                        <th class="text-white py-2 px-4 border-bottom">{{ __('device.type') }}</th>
-                                        <th class="text-white py-2 px-4 border-bottom">{{ __('device.serial_number') }}</th>
-                                        <th class="text-white py-2 px-4 border-bottom">{{ __('device.description') }}</th>
+                                        <th class="text-white py-2 px-4 border-bottom">{{ __('file.title') }}</th>
+                                        <th class="text-white py-2 px-4 border-bottom">{{ __('file.original_name') }}</th>
                                         <th class="text-white py-2 px-4 border-bottom"></th>
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white">
-                                    @forelse ($devices as $device)
+                                    @forelse ($files as $file)
                                         <tr class="hover:bg-gray-100">
-                                            <td>{{ $device->name }}</td>
-                                            <td>{{ $device->type }}</td>
-                                            <td>{{ $device->serial_number }}</td>
-                                            <td>{{ $device->description }}</td>
+                                            <td>{{ $file->title }}</td>
+                                            <td>{{ $file->original_name }}</td>
                                             <td>
                                                 <div class="d-flex align-items-center gap-1">
-                                                    <a href="{{ route('admin.device.select', $device->id) }}"
+                                                    <a href="{{ route('admin.file.select', $file->id) }}"
                                                         class="btn btn-sm btn-primary">
-                                                        {{ __('device.edit') }}
+                                                        {{ __('file.edit') }}
                                                     </a>
-                                                    <form action="{{ route('admin.device.delete', $device->id) }}" method="POST"
+                                                    <form action="{{ route('admin.file.delete', $file->id) }}" method="POST"
                                                         onsubmit="return confirm('Bu cihazı silmek istediğinize emin misiniz?');">
                                                         @csrf
                                                         <button type="submit" class="btn btn-sm btn-danger">
-                                                            {{ __('device.delete') }}
+                                                            {{ __('file.delete') }}
                                                         </button>
                                                     </form>
                                                 </div>
@@ -85,9 +81,9 @@
                                     @endforelse
                                 </tbody>
                             </table>
-                            <div class="mt-3 d-flex justify-content-center">
-                                {{ $devices->links('pagination::bootstrap-5') }}
-                            </div>
+                           <div class="mt-3 d-flex justify-content-center">
+                                    {{ $files->links('pagination::bootstrap-5') }}
+                           </div>
                         </div>
                     </div>
                 </div>
@@ -96,4 +92,9 @@
     </div>
 @endsection
 @section('js')
+<script>
+      $(document).ready(function() {
+         $('.select2').select2();
+      });
+</script>
 @endsection
