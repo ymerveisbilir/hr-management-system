@@ -144,7 +144,8 @@ class DeviceAssignmentController extends Controller
         $device_assignment = DeviceAssignment::findOrFail($id);
         $device_assignment->delete();
 
-        return ['success_msg' => __('device_assignment.delete_success_msg')];
+        return redirect()->route('admin.device_assignment.index')
+        ->with('success_msg', __('device_assignment.delete_success_msg'));    
     }
     public function my_debit_list(Request $request)
     {

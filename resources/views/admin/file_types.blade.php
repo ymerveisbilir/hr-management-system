@@ -5,6 +5,9 @@
 @section('css')
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 @endsection
+@php
+    use App\Http\Helpers\GlobalVariables;
+@endphp
 @section('content')
 <div class="content-wrapper">
     <div class="container-xxl flex-grow-1 container-p-y">
@@ -58,7 +61,7 @@
                                         <td>{{ $file_type->name }}</td>
                                         <td>{{ implode(',', $file_type->allowed_extensions ?? []) }}</td>
                                         <td>
-                                            @if ($file_type->is_active == 0)
+                                            @if ($file_type->is_active == GlobalVariables::FILE_STATUS_PASSIVE)
                                                 <span class="badge bg-danger">{{ __('words.passive') }}</span>
                                             @else
                                                 <span class="badge bg-success">{{ __('words.active') }}</span>

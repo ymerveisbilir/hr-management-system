@@ -68,7 +68,7 @@ class UserPermissionController extends Controller
                 'start_date'             => $data['start_date'],
                 'end_date'             => $data['end_date'],
                 'description'             => $data['description'],
-                'status'    => 2,//bekliyor durumunda oluşturulmalı.
+                'status'    => GlobalVariables::USER_PERM_STATUS_WAITING,//bekliyor durumunda oluşturulmalı.
             ]);
             DB::commit();
         }catch(\Exception $e){
@@ -129,7 +129,8 @@ class UserPermissionController extends Controller
         $user_permission = UserPermission::findOrFail($id);
         $user_permission->delete();
 
-        return ['success_msg' => __('user_permission.delete_success_msg')];
+        return redirect()->route('admin.user_permission.index')
+        ->with('success_msg', __('user_permission.delete_success_msg'));    
     }
 
     public function request_index(Request $request)

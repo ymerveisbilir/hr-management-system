@@ -9,6 +9,7 @@ use App\Models\File;
 use App\Models\FileType;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Helpers\GlobalVariables;
 
 class FileController extends Controller
 {
@@ -35,7 +36,7 @@ class FileController extends Controller
     public function new()
     {
         $auth_user = AuthUser::get();
-        $file_types = FileType::where('is_active', 1)->get();
+        $file_types = FileType::where('is_active', GlobalVariables::FILE_STATUS_ACTIVE)->get();
         $users = User::get();
         $assignedUsers = [];
         return view('admin.files',['new'   => '.','auth_user' => $auth_user,'file_types' => $file_types,'users' => $users,'assignedUsers' => $assignedUsers]);
@@ -105,7 +106,7 @@ class FileController extends Controller
     {
         $auth_user = AuthUser::get();
         $file =  File::findOrFail($id);
-        $file_types = FileType::where('is_active', 1)->get();
+        $file_types = FileType::where('is_active', GlobalVariables::FILE_STATUS_ACTIVE)->get();
         $assignedUsers = $file->users()->pluck('user_id')->toArray(); 
 
         $users = User::get();
@@ -200,7 +201,8 @@ class FileController extends Controller
         $file = File::findOrFail($id);
         $file->delete();
 
-        return ['success_msg' => __('file.delete_success_msg')];
+        return redirect()->route('admin.file.index')
+        ->with('success_msg', __('file.delete_success_msg'));
     }
     public function my_file_list(Request $request)
     {

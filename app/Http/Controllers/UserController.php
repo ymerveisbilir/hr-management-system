@@ -141,7 +141,8 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
 
-        return ['success_msg' => __('user.delete_success_msg')];
+        return redirect()->route('admin.user.index')
+        ->with('success_msg', __('user.delete_success_msg'));
     }
 }
 

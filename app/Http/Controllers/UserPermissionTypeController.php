@@ -101,6 +101,7 @@ class UserPermissionTypeController extends Controller
         $user_permission_type = UserPermissionType::findOrFail($id);
         $user_permission_type->delete();
 
-        return ['success_msg' => __('user_permission_type.delete_success_msg')];
+        return redirect()->route('admin.user_permission_type.index')
+        ->with('success_msg', __('user_permission_type.delete_success_msg'));        
     }
 }

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Helpers\AuthUser;
 use Illuminate\Support\Facades\DB;
 use App\Models\FileType;
+use App\Http\Helpers\GlobalVariables;
 
 class FileTypeController extends Controller
 {
@@ -119,6 +120,7 @@ class FileTypeController extends Controller
         $file_type = FileType::findOrFail($id);
         $file_type->delete();
 
-        return ['success_msg' => __('file_type.delete_success_msg')];
+        return redirect()->route('admin.file_type.index')
+        ->with('success_msg', __('file_type.delete_success_msg'));
     }
 }

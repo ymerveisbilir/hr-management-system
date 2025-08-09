@@ -117,6 +117,7 @@ class DeviceController extends Controller
         $device = Device::findOrFail($id);
         $device->delete();
 
-        return ['success_msg' => __('device.delete_success_msg')];
+        return redirect()->route('admin.device.index')
+        ->with('success_msg', __('device.delete_success_msg'));    
     }
 }
