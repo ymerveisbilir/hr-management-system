@@ -1,6 +1,6 @@
 <?php 
 return[
-'title' => 'İzin Talepleri',
+'title' => 'İzin Taleplerim',
 'description'   => 'Açıklama',
 'created_at'      => 'Oluşturulma Tarihi',
 'start_date'      => 'Başlangıç Tarihi',
@@ -12,7 +12,7 @@ return[
 'update_success_msg'       => 'İzin talebi güncellendi.',
 'success_msg' => 'İzin talebi oluşturuldu.',
 'permission_type_id' => 'İzin Türü',
-'permission_request' => 'İzin Talepleri',
+'permission_request' => 'İzin Taleplerim',
 'approve'         => 'Onayla',
 'decline'         => 'Reddet',
 'user'   => 'Talep Sahibi',

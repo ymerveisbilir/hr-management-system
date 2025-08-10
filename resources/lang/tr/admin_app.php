@@ -9,7 +9,7 @@
 
     'users' => 'Kullanıcılar',
     'user_permission_type'   => 'İzin Türleri',
-    'user_permission'       => 'İzin Talepleri',
+    'user_permission'       => 'İzin Taleplerim',
     'user_permission_request'   => 'İzin Talepleri(Onay Ekranı)',
 
     'device'    => 'Cihazlar',
