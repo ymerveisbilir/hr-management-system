@@ -1,61 +1,82 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# İnsan Kaynakları Yönetim Sistemi (İKYS)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## 📌 Projenin Amacı
+Bu proje, çalışanların bilgi, belge ve izin taleplerini yönetmesini sağlayan bir sistemdir.  
+Superadmin tüm kullanıcıları ve süreçleri tek panelden yönetebilir. Kullanıcılar yalnızca kendi bilgilerini görebilir ve izin başvurusu yapabilir.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🧑‍💼 Sistem Rollerimiz
+- **Superadmin:** Sistemin tüm yönetim işlemlerini yapar.  
+- **Kullanıcı:** Sisteme Superadmin tarafından eklenen personeldir.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 📂 Modüller
 
-## Learning Laravel
+### 1. Kullanıcı Yönetimi (Superadmin Paneli)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Kullanıcılar  
+- Harici kayıt (register) özelliği yoktur.  
+- Sadece Superadmin kullanıcı ekleyebilir, düzenleyebilir ve silebilir.  
+- Superadmin, kullanıcılar ekranında sadece kendisine bağlı kullanıcıları görür.  
+- Yeni kullanıcı eklerken aşağıdaki bilgiler girilir:  
+  - İsim, Soyisim, E-posta, Şifre  
+  - Ünvan (Pozisyon)  
+  - İzin onaylayıcısı (Bu kullanıcının izin taleplerini onaylayacak kişi)  
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Tanımlamalar (Yalnızca Superadmin tarafından yapılır)  
+- İzin Türleri  
+- Cihazlar  
+- Dosya Türleri  
+- Zimmetler (emanet cihaz, ekipman vb.)  
+- Dosyalar (Sözleşme, Sertifika, Evrak vb.)  
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-## Laravel Sponsors
+### 2. Kullanıcı Dashboard (Kullanıcı Girişi Sonrası)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Hesabım - Şifre & Güvenlik  
+- Kullanıcı adı, soyadı, şifre, ünvanı ve kişisel bilgilerini görüntüler.  
+- Kullanıcı bu bilgileri düzenleyebilir.  
 
-### Premium Partners
+İzin Taleplerim  
+- Kullanıcı daha önce oluşturduğu izin taleplerini görüntüler.  
+- Yeni izin talebi oluşturabilir:  
+  - İzin başlangıç ve bitiş tarihi  
+  - İzin türü (Yıllık izin, Mazeret izni vb.)  
+  - Açıklama alanı  
+- İzin talebi, sistemde belirlenen onaylayıcıya iletilir.  
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+İzin Talepleri (Onay Ekranı)  
+- Eğer kullanıcı onaylayıcı ise, kendisine bağlı personelin izin taleplerini görüntüler.  
+- Talepleri onaylayabilir veya reddedebilir.  
+- Superadmin, kullanıcı eklerken bu kullanıcının hangi izinleri onaylayacağını belirler.  
 
-## Contributing
+Zimmetlerim  
+- Superadmin tarafından girilen zimmetler (emanet cihaz, laptop, telefon, ekipman vb.) listelenir.  
+- Kullanıcı sadece kendi zimmetlerini görüntüleyebilir.  
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Dosyalarım  
+- Superadmin’in eklediği sözleşme, sertifika, evrak vb. dosyalar listelenir.  
+- Dosyalar kategorilere (Sertifikalar, Sözleşmeler, Diğer) ayrılabilir.  
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## 🔗 İlişki Yapısı
+- Superadmin ➜ Kullanıcı oluşturur ➜ Kullanıcı kendi dashboard’una erişir.  
+- Kullanıcı ➜ İzin başvurusu yapar ➜ İzin onaylayıcı onaylar veya reddeder.  
+- Superadmin ➜ Kullanıcılara zimmet ve dosya atar ➜ Kullanıcılar kendi zimmet ve dosyalarını görür.  
+- İzin onaylayıcıları ➜ Sadece yetkili oldukları kullanıcıların izinlerini görür.  
 
-## Security Vulnerabilities
+---
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## 🛠 Kullanılan Teknolojiler
+- **Backend:** Laravel 12  
+- **Frontend:** Bootstrap / Vuexy Theme  
+- **Veritabanı:** MySQL  
+- **Diğer:** Select2, jQuery, npm, composer
 
-## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Merve [SOYAD]  
+[E-POSTA_ADRESİNİZ]
