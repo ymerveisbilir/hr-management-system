@@ -77,6 +77,3 @@ Dosyalarım
 - **Veritabanı:** MySQL  
 - **Diğer:** Select2, jQuery, npm, composer
 
-
-Merve [SOYAD]  
-[E-POSTA_ADRESİNİZ]
